@@ -1,6 +1,6 @@
 let file = 'myfile.js'
 
 
-import('./'+file)
-.then(()=>console.log('ok'))
+import(/* webpackIgnore: true */ './'+file)
+.then(m=>console.log(m.default))
 .catch(err=>console.error(err))

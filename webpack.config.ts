@@ -11,9 +11,16 @@ let defaultConfig: Configuration = {
   output: {   
     filename: `[name].js`,
     library: {
-      type: 'commonjs2',
+      type: 'module',
     },
-    clean: true,
+    clean: false,
+    libraryTarget:"module",
+    chunkFormat:"module",
+    module:true
+  },
+  experiments:{
+    outputModule:true,
+    topLevelAwait:true,
   },
   module: {
     rules: [
@@ -30,7 +37,14 @@ let defaultConfig: Configuration = {
   
 
     ],
-  },
+  },node:{
+    __dirname:true,
+    __filename:true
+  }
 
 };
 export default defaultConfig;
+
+
+
+
