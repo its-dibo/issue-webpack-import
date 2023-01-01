@@ -1,0 +1,94 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
+    "removeComments": true,
+    "noEmit": false,
+    "noEmitOnError": false,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveSymlinks": true,
+    "sourceRoot": "",
+    "mapRoot": "",
+    "emitDecoratorMetadata": true,
+    "locale": "en",
+    "watch": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "@engineers/*": ["./packages/*"],
+      "~~*": ["./*"]
+      /* causes `ERR_REQUIRE_ESM` error 
+      https://stackoverflow.com/questions/69351138/tsconfig-causes-err-require-esm-must-use-import-to-load-es-module
+       "*": ["node_modules/*", "types/*"]
+        */
+    },
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    // required for ts-jest
+    "allowJs": true,
+    /* todo: enable this option https://stackoverflow.com/a/50241920/12577650 */
+    "strictPropertyInitialization": false,
+    // fixes ngcc failed to run on ngx-sharebuttons
+    // https://github.com/MurhafSousli/ngx-sharebuttons/issues/474#issuecomment-715603754
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/e2e", "**/test.ts"],
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "strictTemplates": true,
+    /* override some of 'strictTemplates' strictness */
+    "strictInjectionParameters": true,
+    "strictInputTypes": true,
+    "strictInputAccessModifiers": true,
+    "strictNullInputTypes": true,
+    "strictSafeNavigationTypes": true,
+    "strictDomLocalRefTypes": true,
+    "strictOutputEventTypes": true,
+    "strictDomEventTypes": true,
+    "strictContextGenerics": true,
+    "strictLiteralTypes": true,
+    /* todo: enable, it causes error in angular components (html files) ex: <span dir="auto"> */
+    "strictAttributeTypes": false
+  },
+  /*
+  tsconfig for `ts-node` only.
+  to run an es module use `ts-node --esm file.ts`
+  */
+  "ts-node": {
+    "compilerOptions": {
+      "sourceMap": false,
+      // todo: ts-node now supports esm
+      "module": "commonjs"
+    },
+    // enable ts-node to use tsconfig.compilerOptions.path:
+    // - in runtime, example: `node dist/transpiled-file.js`
+    // - to compile webpack config file in typescript, example: `webpack --config webpack.config.ts`
+    // npm i -D tsconfig-paths
+    // or use `ts-node -r tsconfig-paths/register`
+    "require": ["tsconfig-paths/register"],
+    "transpileOnly": true,
+    "moduleTypes": {
+      // compile `webpack.config.ts` as commonjs
+      "**/webpack.config.ts": "cjs",
+      "**/webpack.config.*.ts": "cjs",
+      "**/jest.config.ts": "cjs"
+    }
+  }
+}
